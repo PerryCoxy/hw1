@@ -12,7 +12,7 @@ function App() {
       <Header />
       <Slider />
       <Text
-        element={'p'}
+        element='p'
         children='Какой-то текст'
       />
       <Footer />

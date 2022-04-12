@@ -16,9 +16,11 @@ const Text = ({
     element,
     {
       className: cn(className,
-        {[s.strong]: strong},
-        {[s.italic]: italic},
-        {[s.disabled]: disabled},
+        {
+          [s.strong]: strong,
+          [s.italic]: italic,
+          [s.disabled]: disabled,
+        }
         ),
     },
     children
@@ -33,7 +35,7 @@ Text.defaultProps = {
 };
 
 Text.propTypes = {
-  element: PropTypes.oneOf(['div', 'p', 'span']).isRequired,
+  element: PropTypes.oneOf(['div', 'p', 'span']),
   children: PropTypes.node,
   className: PropTypes.string,
   strong: PropTypes.bool,
