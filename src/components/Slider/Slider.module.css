@@ -26,28 +26,6 @@
   justify-content: center;
 }
 
-.header {
-  color: #fff;
-  font-size: 54px;
-  margin-bottom: 48px;
-}
-
-.header::after {
-  content: "";
-  display: block;
-  width: 30%;
-  position: relative;
-  border-bottom: 1px solid #aaa;
-  text-align: center;
-  margin: 15px auto 0;
-}
-
-.subheader {
-  color: #fff;
-  font-size: 30px;
-  margin-bottom: 60px;
-}
-
 .call {
   color: white;
   display: block;
