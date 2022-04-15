@@ -3,17 +3,8 @@
 }
 
 .header {
-  height: 80px;
-  width: 100%;
-  transition: height 0.2s linear, box-shadow 0.2s linear;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  background: rgba(245, 245, 245, 0.97);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: #fff;
+  margin-bottom: 48px;
 }
 
 .header.small {

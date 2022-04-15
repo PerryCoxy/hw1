@@ -1,27 +1,31 @@
 import Container from '../Container';
 import Heading from '../Heading';
 
-import style from './Slider.module.css';
+import s from './Slider.module.scss';
 
 const Slider = () => {
   return (
-    <section className={style.section}>
-      <div className={style.slider}>
-        <Container className={style.sliderContent}>
+    <section className={s.section}>
+      <div className={s.slider}>
+        <Container className={s.sliderContent}>
 
-          <Heading level={1}>
-            Это заголовок!
+          <Heading
+            level={1}
+            colorwhite
+          >
+            Triple Triad Game
           </Heading>
 
           <Heading
             level={2}
-            className={style.subheader}
+            className={s.subheader}
+            colorwhite
           >
             Wow.Wow.Wow
           </Heading>
 
-          <div className={style.call}>
-            <button className={style.button}>Wow</button>
+          <div className={s.call}>
+            <button className={s.button}>Wow</button>
           </div>
 
         </Container>
