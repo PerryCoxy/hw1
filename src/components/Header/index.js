@@ -1,7 +1,7 @@
 import Container from '../Container'
 import logo from '../../assets/logo.png'
 
-import s from './Header.module.css'
+import s from './Header.module.scss'
 
 const MENU = ['Menu 1', 'Menu 2', 'Menu 3', 'Menu 4'];
 
