@@ -80,53 +80,69 @@ function App() {
 
   const [character, setCharacter] = useState(CHARACTER);
   const handleLikeClick = id => {
-    console.log('####:> id', id);
-    const prevCharacter = character;
-    setCharacter(prevCharacter.map(item => {
-      if (item.id === id ) {
-        item.isLike = !item.isLike;
-        console.log('####: ~ file: App.js ~ line 86 ~ App ~ item', item.isLike);
-      };
-      return item;
-    }));
+    setCharacter(prevState =>
+      prevState.map(item => {
+        return item.id === id ? { ...item, isLike: !item.isLike } : item;
+      })
+    )
+  };
+
+  const [showBio, setShowBio] = useState(true);
+
+  const handleBioClick = id => {
+    console.log('id :>> ', id);
+    setShowBio(prevState => !prevState)
   };
 
   return (
     <div className="App">
-      <Header />
-      <Slider />
-      <section className={s.cardSection}>
-        <Container>
-          <div className={s.cartTitle}>
-            <Heading backLine>
-              Marvel Cards
-            </Heading>
-            <Heading level={2}>
-              Collect your best five
-            </Heading>
-          </div>
-          <div className={s.cardWrap}>
-            {
-              character.map(item => {
-                return (
-                  <div key={item.id}>
-                    <ChapterCard
-                      id={item.id}
-                      name={item.name}
-                      src={item.thumbnail.path}
-                      humanName={item.humanName}
-                      description={item.description}
-                      onLikeClick={handleLikeClick}
-                    />
-                  </div>
-                )
-              })
-            }
+      {
+        showBio
+          ?
+          <>
+            <Header />
+            <Slider />
+            <section className={s.cardSection}>
+              <Container>
+                <div className={s.cartTitle}>
+                  <Heading backLine>
+                    Marvel Cards
+                  </Heading>
+                  <Heading level={2}>
+                    Collect your best five
+                  </Heading>
+                </div>
+                <div className={s.cardWrap}>
+                  {character.map(item => {
+                    return (
+                      <div key={item.id}>
+                        <ChapterCard
+                          id={item.id}
+                          name={item.name}
+                          src={item.thumbnail.path}
+                          humanName={item.humanName}
+                          description={item.description}
+                          onLikeClick={handleLikeClick}
+                          isLike={item.isLike}
+                          onBioClick={handleBioClick} />
+                      </div>
+                    );
+                  })}
 
-          </div>
-        </Container>
-      </section>
-      <Footer />
+                </div>
+              </Container>
+            </section>
+            <Footer />
+          </>
+          : <>
+            <button
+              onClick={handleBioClick}
+            >
+              назад
+            </button>
+          </>
+      }
+
     </div>
   );
 }

@@ -16,7 +16,7 @@ const Header = () => {
           <ul className={s.nav}>
             {MENU.map(item => {
               return (
-                <li>
+                <li key={item}>
                   <a href="#">
                     {item}
                   </a>
