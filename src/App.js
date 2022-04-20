@@ -9,6 +9,8 @@ import Text from './components/Text/index'
 import Heading from './components/Heading/index'
 import Container from './components/Container/index'
 import ChapterCard from './components/ChapterCard/index'
+import Button from './components/Button/index'
+import Biography from './pages/Biography/index'
 
 import s from './App.module.scss';
 
@@ -75,7 +77,6 @@ const CHARACTER = [
   }
 ];
 
-
 function App() {
 
   const [character, setCharacter] = useState(CHARACTER);
@@ -87,20 +88,33 @@ function App() {
     )
   };
 
-  const [showBio, setShowBio] = useState(true);
+  const [showBio, setShowBio] = useState(false);
+  const [id, setId] = useState();
 
   const handleBioClick = id => {
-    console.log('id :>> ', id);
-    setShowBio(prevState => !prevState)
+    console.log('####: ~ file: App.js ~ line 94 ~ App ~ id', id);
+    setShowBio(prevState => !prevState);
+    setId(id);
   };
 
   return (
     <div className="App">
+      <Header />
       {
         showBio
           ?
           <>
-            <Header />
+            <Button
+              value="Go back"
+              isWhite
+              onBackClick={handleBioClick}
+            />
+            <Biography
+              id={id}
+            />
+          </>
+          :
+          <>
             <Slider />
             <section className={s.cardSection}>
               <Container>
@@ -134,15 +148,7 @@ function App() {
             </section>
             <Footer />
           </>
-          : <>
-            <button
-              onClick={handleBioClick}
-            >
-              назад
-            </button>
-          </>
       }
-
     </div>
   );
 }

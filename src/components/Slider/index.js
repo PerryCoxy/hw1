@@ -1,5 +1,6 @@
 import Container from '../Container';
 import Heading from '../Heading';
+import Button from '../Button';
 
 import s from './Slider.module.scss';
 
@@ -25,7 +26,7 @@ const Slider = () => {
           </Heading>
 
           <div className={s.call}>
-            <button className={s.button}>Wow</button>
+            <Button value="Wow"/>
           </div>
 
         </Container>
