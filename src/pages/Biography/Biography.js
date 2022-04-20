@@ -1,5 +1,6 @@
 import Heading from '../../components/Heading';
 import Text from '../../components/Text';
+import Button from '../../components/Button';
 
 import s from './Biography.module.scss'
 
@@ -290,19 +291,30 @@ export const BIO = {
   ],
 }
 
-const Biography = ({ id }) => {
+const Biography = ({ id, onBackClick }) => {
+
+  const handleBackClick = (id) => {
+    onBackClick(id);
+  }
 
   return (
     <div className={s.root}>
+      <Button
+        value="Go back"
+        isWhite
+        onClick={handleBackClick}
+      />
       {BIO[id].map(item => {
-        return (
-          <>
-            {item.type === 'h1' && <Heading level={1} children={item.text}/>}
-            {item.type === 'h2' && <Heading level={2} children={item.text}/>}
-            {item.type === 'paragraph' && <Text children={item.text}/>}
-            {item.type === 'img' && <img src={item.src} alt="img" />}
-          </>
-        )
+        switch (item.type) {
+          case 'h1':
+            return <Heading level={1} children={item.text} />;
+          case 'h2':
+            return <Heading level={2} children={item.text} />
+          case 'paragraph':
+            return <Text children={item.text} />
+          case 'img':
+            return <img src={item.src} alt="img" />
+        }
       })}
     </div>
   )

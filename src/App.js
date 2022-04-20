@@ -104,13 +104,9 @@ function App() {
         showBio
           ?
           <>
-            <Button
-              value="Go back"
-              isWhite
-              onBackClick={handleBioClick}
-            />
             <Biography
               id={id}
+              onBackClick={handleBioClick}
             />
           </>
           :

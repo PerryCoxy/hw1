@@ -7,10 +7,11 @@ const Button = ({
   id,
   value,
   isWhite,
-  onBackClick  }) => {
+  onClick
+}) => {
 
   const handleBioClick = () => {
-    onBackClick (id);
+    onClick(id);
   };
   return (
     <button
@@ -31,7 +32,7 @@ Button.defaultProps = {
 Button.propTypes = {
   value: PropTypes.string,
   isWhite: PropTypes.bool,
-  onBioClick: PropTypes.func,
+  onClick: PropTypes.func,
 }
 
 
