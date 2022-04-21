@@ -9,6 +9,8 @@ import Text from './components/Text/index'
 import Heading from './components/Heading/index'
 import Container from './components/Container/index'
 import ChapterCard from './components/ChapterCard/index'
+import Button from './components/Button/index'
+import Biography from './pages/Biography/index'
 
 import s from './App.module.scss';
 
@@ -75,58 +77,74 @@ const CHARACTER = [
   }
 ];
 
-
 function App() {
 
   const [character, setCharacter] = useState(CHARACTER);
   const handleLikeClick = id => {
-    console.log('####:> id', id);
-    const prevCharacter = character;
-    setCharacter(prevCharacter.map(item => {
-      if (item.id === id ) {
-        item.isLike = !item.isLike;
-        console.log('####: ~ file: App.js ~ line 86 ~ App ~ item', item.isLike);
-      };
-      return item;
-    }));
+    setCharacter(prevState =>
+      prevState.map(item => {
+        return item.id === id ? { ...item, isLike: !item.isLike } : item;
+      })
+    )
+  };
+
+  const [showBio, setShowBio] = useState(false);
+  const [id, setId] = useState();
+
+  const handleBioClick = id => {
+    console.log('####: ~ file: App.js ~ line 94 ~ App ~ id', id);
+    setShowBio(prevState => !prevState);
+    setId(id);
   };
 
   return (
     <div className="App">
       <Header />
-      <Slider />
-      <section className={s.cardSection}>
-        <Container>
-          <div className={s.cartTitle}>
-            <Heading backLine>
-              Marvel Cards
-            </Heading>
-            <Heading level={2}>
-              Collect your best five
-            </Heading>
-          </div>
-          <div className={s.cardWrap}>
-            {
-              character.map(item => {
-                return (
-                  <div key={item.id}>
-                    <ChapterCard
-                      id={item.id}
-                      name={item.name}
-                      src={item.thumbnail.path}
-                      humanName={item.humanName}
-                      description={item.description}
-                      onLikeClick={handleLikeClick}
-                    />
-                  </div>
-                )
-              })
-            }
+      {
+        showBio
+          ?
+          <>
+            <Biography
+              id={id}
+              onBackClick={handleBioClick}
+            />
+          </>
+          :
+          <>
+            <Slider />
+            <section className={s.cardSection}>
+              <Container>
+                <div className={s.cartTitle}>
+                  <Heading backLine>
+                    Marvel Cards
+                  </Heading>
+                  <Heading level={2}>
+                    Collect your best five
+                  </Heading>
+                </div>
+                <div className={s.cardWrap}>
+                  {character.map(item => {
+                    return (
+                      <div key={item.id}>
+                        <ChapterCard
+                          id={item.id}
+                          name={item.name}
+                          src={item.thumbnail.path}
+                          humanName={item.humanName}
+                          description={item.description}
+                          onLikeClick={handleLikeClick}
+                          isLike={item.isLike}
+                          onBioClick={handleBioClick} />
+                      </div>
+                    );
+                  })}
 
-          </div>
-        </Container>
-      </section>
-      <Footer />
+                </div>
+              </Container>
+            </section>
+            <Footer />
+          </>
+      }
     </div>
   );
 }

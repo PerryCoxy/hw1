@@ -16,12 +16,14 @@ const ChapterCard = ({
   description,
   isLike,
   onLikeClick,
+  onBioClick,
 }) => {
 
-  const [active, setActive] = useState(false);
   const handleClick = () => {
     onLikeClick(id);
-    console.log('####: ~ file: ChapterCard.js ~ line 20 ~ isLike', isLike);
+  };
+  const handleBioClick = () => {
+    onBioClick(id);
   };
   return (
     <div className={s.root}>
@@ -49,7 +51,10 @@ const ChapterCard = ({
             })}>
             <Like />
           </div>
-          <div className={s.readBio}>
+          <div
+            className={s.readBio}
+            onClick={handleBioClick}
+          >
             <a href="#">Read bio</a>
           </div>
         </div>
@@ -70,6 +75,7 @@ ChapterCard.propTypes = {
   description: PropTypes.string,
   isLike: PropTypes.bool,
   onLikeClick: PropTypes.func,
+  onBioClick: PropTypes.func,
 }
 
 export default ChapterCard;
