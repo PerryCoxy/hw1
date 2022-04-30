@@ -16,6 +16,26 @@
   }
 }
 
+.default {
+  color: #ffffff;
+  border: 1px solid white;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+  }
+}
+
+.black {
+  color: #000000;
+  border: 1px solid #000000;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+}
+
 .white {
   background-color: #ffffff;
   color: #000;

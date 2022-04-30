@@ -4,21 +4,18 @@ import cn from 'classnames';
 import s from './Button.module.scss'
 
 const Button = ({
-  id,
   value,
-  isWhite,
-  onClick
+  onClick,
+  color,
 }) => {
 
-  const handleBioClick = () => {
-    onClick(id);
+  const handleClick = () => {
+    onClick && onClick();
   };
   return (
     <button
-      className={cn(s.root, {
-        [s.white]: isWhite
-      })}
-      onClick={handleBioClick}
+      className={cn(s.root, s[color])}
+      onClick={handleClick}
     >
       {value}
     </button>
@@ -26,12 +23,12 @@ const Button = ({
 }
 
 Button.defaultProps = {
-  isWhite: false,
+  color: 'default',
 }
 
 Button.propTypes = {
-  value: PropTypes.string,
-  isWhite: PropTypes.bool,
+  value: PropTypes.node,
+  color: PropTypes.oneOf(['default', 'black']),
   onClick: PropTypes.func,
 }
 

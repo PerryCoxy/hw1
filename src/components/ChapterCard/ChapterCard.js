@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import PropTypes from "prop-types";
 import cn from 'classnames';
 import Heading from '../Heading';
@@ -6,24 +5,25 @@ import Text from '../Text';
 
 import s from './ChapterCard.module.scss';
 
-import { ReactComponent as Like } from './assets/heart.svg'
+import {ReactComponent as Like} from './assets/heart.svg'
+import {Link} from "react-router-dom";
 
 const ChapterCard = ({
-  id,
-  name,
-  src,
-  humanName,
-  description,
-  isLike,
-  onLikeClick,
-  onBioClick,
-}) => {
+                       id,
+                       name,
+                       src,
+                       humanName,
+                       description,
+                       isLike,
+                       onLikeClick,
+                       onReadBio,
+                     }) => {
 
   const handleClick = () => {
-    onLikeClick(id);
+    onLikeClick && onLikeClick(id);
   };
-  const handleBioClick = () => {
-    onBioClick(id);
+  const handleReadBioClick = () => {
+    onReadBio && onReadBio(id);
   };
   return (
     <div className={s.root}>
@@ -49,13 +49,13 @@ const ChapterCard = ({
             className={cn(s.like, {
               [s.active]: isLike
             })}>
-            <Like />
+            <Like/>
           </div>
           <div
             className={s.readBio}
-            onClick={handleBioClick}
+            onClick={handleReadBioClick}
           >
-            <a href="#">Read bio</a>
+            <Link to={`bio/${id}`}>Read bio</Link>
           </div>
         </div>
       </div>
@@ -75,7 +75,7 @@ ChapterCard.propTypes = {
   description: PropTypes.string,
   isLike: PropTypes.bool,
   onLikeClick: PropTypes.func,
-  onBioClick: PropTypes.func,
+  onReadBio: PropTypes.func,
 }
 
 export default ChapterCard;
