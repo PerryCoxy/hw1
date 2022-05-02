@@ -9,8 +9,25 @@
   text-align: center;
 }
 
-.btnWrap{
+.btnWrap {
   padding: 24px 0;
   display: flex;
   justify-content: center;
+}
+
+.subheadingWrap {
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    .anchorLink {
+      visibility: visible;
+    }
+  }
+}
+
+.anchorLink {
+  width: 30px;
+  height: 30px;
+  visibility: hidden;
 }
