@@ -14,20 +14,3 @@
   display: flex;
   justify-content: center;
 }
-
-.subheadingWrap {
-  display: flex;
-  align-items: center;
-
-  &:hover {
-    .anchorLink {
-      visibility: visible;
-    }
-  }
-}
-
-.anchorLink {
-  width: 25px;
-  height: 25px;
-  visibility: hidden;
-}

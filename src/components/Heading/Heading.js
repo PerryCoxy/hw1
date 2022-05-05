@@ -1,6 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { ReactComponent as AnchorLink } from './assets/link_icon.svg';
 import s from './Heading.module.scss';
 
 const Heading = ({
@@ -8,8 +10,18 @@ const Heading = ({
   className,
   children,
   colorwhite,
-  backLine
+  backLine,
+  isAnchorLink,
+  linkTo
 }) => {
+  const childrenWithAnchorLink = <div className={s.childrenWithAnchorLink}>
+    {children}
+    {isAnchorLink &&
+      <Link to={`#${linkTo}`} className={s.anchorLink}>
+        <AnchorLink className={s.anchorLink} onClick={() => {navigator.clipboard.writeText(document.location.href)}}/>
+      </Link>}
+  </div>
+
   const el = `h${level}`
   return React.createElement(
     el,
@@ -22,8 +34,7 @@ const Heading = ({
         [s.colorwhite]: colorwhite
       }
       ),
-    },
-    children
+    }, childrenWithAnchorLink
   );
 };
 
@@ -31,6 +42,7 @@ Heading.defaultProps = {
   level: 1,
   colorwhite: false,
   backLine: false,
+  isAnchorLink: false
 };
 
 Heading.propTypes = {
@@ -39,6 +51,8 @@ Heading.propTypes = {
   children: PropTypes.node,
   colorwhite: PropTypes.bool,
   backLine: PropTypes.bool,
+  isAnchorLink: PropTypes.bool,
+  linkTo: PropTypes.string,
 };
 
 export default Heading;

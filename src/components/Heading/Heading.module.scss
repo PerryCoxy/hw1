@@ -4,10 +4,10 @@
   color: #000000d9;
   font-weight: 600;
 
-  &.backLine{
+  &.backLine {
     text-align: center;
-    &::after{
-      content: "";
+    &::after {
+      content: '';
       display: block;
       width: 30%;
       max-width: 100px;
@@ -47,3 +47,19 @@
   line-height: 1.5;
 }
 
+.childrenWithAnchorLink {
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    .anchorLink {
+      visibility: visible;
+    }
+  }
+}
+
+.anchorLink {
+  width: 25px;
+  height: 25px;
+  visibility: hidden;
+}

@@ -7,11 +7,21 @@ import s from "./Layout.module.scss";
 
 
 const Layout = () => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (hash) {
+      const elem = document.querySelector(hash);
+      if (elem) {
+        elem.scrollIntoView({
+          block: 'center',
+          behavior: 'smooth'
+        });
+      };
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
 
   const match = useMatch({ path: '/' })
   return (
