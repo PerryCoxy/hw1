@@ -1,25 +1,34 @@
-import {Outlet, useMatch} from 'react-router-dom';
-import Header from "../Header";
-import Footer from "../Footer";
+import { useEffect } from 'react';
+import { Outlet, useLocation, useMatch } from 'react-router-dom';
 import Container from "../Container";
+import Footer from "../Footer";
+import Header from "../Header";
+import s from "./Layout.module.scss";
 
-import s from "./Layout.module.scss"
 
 const Layout = () => {
-  const match = useMatch({path: '/'})
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  const match = useMatch({ path: '/' })
   return (
     <>
-      <Header/>
+      <Header />
       {
-        match !== null ? <Outlet/> : (
-          <div className={s.container}>
-            <Container>
-              <Outlet/>
-            </Container>
-          </div>
-        )
+        match
+          ? <Outlet />
+          : (
+            <div className={s.container}>
+              <Container>
+                <Outlet />
+              </Container>
+            </div>
+          )
       }
-      <Footer/>
+      <Footer />
     </>
   );
 };

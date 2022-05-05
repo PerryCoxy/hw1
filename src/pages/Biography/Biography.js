@@ -18,18 +18,23 @@ const Biography = () => {
   let { hash } = useLocation();
 
   useEffect(() => {
+    const load = () => {
+      const elem = document.querySelector(hash);
+      if (elem) {
+        elem.scrollIntoView({
+          block: 'center',
+          behavior: 'smooth'
+        });
+      };
+    };
     if (hash) {
-      const element = document.getElementById(hash.replace('#', '').replace('%20', ' '));
-      element.scrollIntoView({
-        block: 'center',
-        behavior: 'smooth'
-      });
-      console.log('useEffect');
+      window.addEventListener('load', load);
     }
-  }, []);
+    return () => window.removeEventListener('load', load);
+  }, [hash]);
 
   const handleBackClick = () => {
-    navigate('/', {
+    navigate(-1, {
       state: {
         from: id,
       }
@@ -55,9 +60,9 @@ const Biography = () => {
             case 'h1':
               return <Heading key={index} level={1} children={item.text} />;
             case 'h2':
-              return <div className={s.subheadingWrap} id={item.text}>
+              return <div className={s.subheadingWrap} id={item.text.replace(' ', '_')}>
                 <Heading key={index} level={2} children={item.text} />
-                <Link to={`#${item.text}`}>
+                <Link to={`#${item.text.replace(' ', '_')}`}>
                   <AnchorLink className={s.anchorLink} />
                 </Link>
               </div>
