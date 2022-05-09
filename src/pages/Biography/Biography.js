@@ -40,9 +40,14 @@ const Biography = () => {
             case 'h1':
               return <Heading key={index} level={1} children={item.text} />;
             case 'h2':
-              return <div className={s.subheadingWrap} id={item.text.replace(' ', '_')}>
-                <Heading key={index} level={2} children={item.text} isAnchorLink linkTo={item.text.replace(' ', '_')} />
-              </div>
+              return <Heading
+                key={index}
+                level={2}
+                children={item.text}
+                id={item.text.split(' ').join('_')}
+                isAnchorLink
+                linkTo={item.text.split(' ').join('_')}
+              />
             case 'paragraph':
               return <Text key={index} children={item.text} />
             case 'img':

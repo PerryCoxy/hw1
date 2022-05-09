@@ -7,6 +7,7 @@ import s from './Heading.module.scss';
 
 const Heading = ({
   level = 1,
+  id,
   className,
   children,
   colorwhite,
@@ -22,10 +23,10 @@ const Heading = ({
       </Link>}
   </div>
 
-  const el = `h${level}`
   return React.createElement(
-    el,
+    `h${level}`,
     {
+      id,
       className: cn(
         s.root,
         className,
@@ -47,6 +48,7 @@ Heading.defaultProps = {
 
 Heading.propTypes = {
   level: PropTypes.oneOf([1, 2, 3, 4, 5]).isRequired,
+  id: PropTypes.string,
   className: PropTypes.string,
   children: PropTypes.node,
   colorwhite: PropTypes.bool,
