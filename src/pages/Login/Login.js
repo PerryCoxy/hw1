@@ -1,19 +1,20 @@
 import cn from 'classnames';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+import Button from '../../components/Button/Button';
+import Input from '../../components/Input';
 import { ReactComponent as IconPen } from './assets/icon-pen.svg';
-import Input from '../../components/Input'
 import logo from './assets/logo.png';
 import s from './Login.module.scss';
-import Button from '../../components/Button/Button';
 
 
 
 const Login = () => {
-  const toggleEl = useRef(null);
-  const closeEl = useRef(null);
-  const containerEl = useRef(null);
 
-  const [loginForm, setLoginForm] = useState({
+  const [login, setLogin] = useState({
+    email: '',
+    password: '',
+  });
+  const [register, setRegister] = useState({
     email: '',
     password: '',
     repeatePassword: '',
@@ -22,37 +23,47 @@ const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
 
   const handleChange = (event) => {
-    setLoginForm(prevState => ({
-      ...prevState,
-      [event.target.name]: event.target.value,
-    })
-    )
+    console.log('####: ~ file: Login.js ~ line 30 ~ handleChange ~ isLogin', isLogin);
+    if (isLogin) {
+      setLogin(prevState => ({
+        ...prevState,
+        [event.target.name]: event.target.value,
+      })
+      )
+    } else {
+      setRegister(prevState => ({
+        ...prevState,
+        [event.target.name]: event.target.value,
+      })
+      )
+    }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!isLogin) delete loginForm.repeatePassword;
-    if (loginForm.repeatePassword && loginForm.password !== loginForm.repeatePassword) alert('Пароли не совпадают!');
-    console.log('form', loginForm);
-    setLoginForm({
-      email: '',
-      password: '',
-      repeatePassword: '',
-    });
+    if (isLogin) {
+      console.log('login', login);
+      setLogin({
+        email: '',
+        password: '',
+      });
+    } else {
+      if (register.password !== register.repeatePassword) {
+        alert('Пароли не совпадают');
+        return;
+      }
+      console.log('register', register);
+      setLogin({
+        email: '',
+        password: '',
+        repeatePassword: '',
+      });
+    }
   };
 
-  useEffect(() => {
-    toggleEl.current.addEventListener('click', () => {
-      toggleEl.current.classList.add(s.active);
-      containerEl.current.classList.add(s.active);
-    });
-
-    closeEl.current.addEventListener('click', () => {
-      setIsLogin(prevState => !prevState);
-      toggleEl.current.classList.remove(s.active);
-      containerEl.current.classList.remove(s.active);
-    });
-  })
+  const handleClick = () => {
+    setIsLogin(prevState => !prevState);
+  }
 
   return (
     <>
@@ -61,7 +72,11 @@ const Login = () => {
         <img src={logo} alt="logo" />
       </div>
 
-      <div ref={containerEl} className={s.container}>
+      <div
+        className={cn(s.container, {
+          [s.active]: !isLogin
+        })}
+      >
         <div className={s.card}></div>
         <div className={s.card}>
           <h1 className={s.title}>Login</h1>
@@ -76,7 +91,7 @@ const Login = () => {
                 required
                 name="email"
                 label="Email"
-                value={loginForm.email}
+                value={login.email}
                 onChange={handleChange}
               />
               <div className={s.bar}></div>
@@ -88,7 +103,7 @@ const Login = () => {
                 required
                 name="password"
                 label="Password"
-                value={loginForm.password}
+                value={login.password}
                 onChange={handleChange}
               />
               <div className={s.bar}></div>
@@ -104,12 +119,20 @@ const Login = () => {
         </div>
 
         <div className={cn(s.card, s.alt)}>
-          <div ref={toggleEl} className={s.toggle}>
+          <div
+            className={cn(s.toggle, {
+              [s.active]: !isLogin
+            })}
+            onClick={handleClick}
+          >
             <IconPen />
           </div>
           <h1 className={s.title}>
             Register
-            <div ref={closeEl} className={s.close}></div>
+            <div
+              className={s.close}
+              onClick={handleClick}
+            ></div>
           </h1>
 
           <form onSubmit={handleSubmit}>
@@ -120,7 +143,7 @@ const Login = () => {
                 required
                 name="email"
                 label="Email"
-                value={loginForm.email}
+                value={register.email}
                 onChange={handleChange}
               />
               <div className={s.bar}></div>
@@ -132,7 +155,7 @@ const Login = () => {
                 required
                 name="password"
                 label="Password"
-                value={loginForm.password}
+                value={register.password}
                 onChange={handleChange}
               />
               <div className={s.bar}></div>
@@ -144,7 +167,7 @@ const Login = () => {
                 required
                 name="repeatePassword"
                 label="Repeat password"
-                value={loginForm.repeatePassword}
+                value={register.repeatePassword}
                 onChange={handleChange}
               />
               <div className={s.bar}></div>

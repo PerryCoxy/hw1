@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import cn from 'classnames';
 import s from './Input.module.scss'
 
 
@@ -7,27 +6,19 @@ const Input = (props) => {
   const {
     id,
     type,
-    required,
-    name,
-    placeholder,
     label,
-    value,
-    onChange
+    onChange,
+    ...inputProps
   } = props;
 
-  const classes = cn('className');
 
   return (
     <div className={s.input_container}>
       <input
         id={id}
         type={type}
-        className={classes}
-        required={required}
-        name={name}
-        placeholder={placeholder}
-        value={value}
         onChange={onChange}
+        {...inputProps}
       />
       {label &&
         <label htmlFor={id}>{label}</label>
