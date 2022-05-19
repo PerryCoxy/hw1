@@ -13,10 +13,14 @@ const Layout = () => {
     if (hash) {
       const elem = document.querySelector(hash);
       if (elem) {
-        elem.scrollIntoView({
-          block: 'center',
-          behavior: 'smooth'
-        });
+        window.addEventListener('load', () => {
+          elem.scrollIntoView({
+            block: 'center',
+            behavior: 'smooth'
+          });
+        }, {
+          once: true
+        })
       };
     } else {
       window.scrollTo(0, 0);
