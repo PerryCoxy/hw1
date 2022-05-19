@@ -53,7 +53,7 @@ const Login = () => {
         return;
       }
       console.log('register', register);
-      setLogin({
+      setRegister({
         email: '',
         password: '',
         repeatePassword: '',
