@@ -5,9 +5,7 @@ import s from './Input.module.scss'
 const Input = (props) => {
   const {
     id,
-    type,
     label,
-    onChange,
     ...inputProps
   } = props;
 
@@ -16,8 +14,6 @@ const Input = (props) => {
     <div className={s.input_container}>
       <input
         id={id}
-        type={type}
-        onChange={onChange}
         {...inputProps}
       />
       {label &&
@@ -27,18 +23,9 @@ const Input = (props) => {
   )
 };
 
-Input.defaultProps = {
-  required: false,
-  type: 'text'
-}
-
 Input.propTypes = {
-  type: PropTypes.oneOf(['email', 'password', 'text']),
-  required: PropTypes.bool,
-  name: PropTypes.string,
-  value: PropTypes.string,
   id: PropTypes.string,
-  placeholder: PropTypes.string,
+  label: PropTypes.string,
 }
 
 export default Input;
