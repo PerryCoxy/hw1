@@ -1,24 +1,17 @@
-import s from './Characters.module.scss';
-import Heading from "../../components/Heading";
+import { useContext, useState } from "react";
 import ChapterCard from "../../components/ChapterCard";
-import {useState} from "react";
-import {CHARACTER} from "../../constants/characters";
+import Heading from "../../components/Heading";
+import { Context } from "../../Context";
+import s from './Characters.module.scss';
 
 const Characters = () => {
-  const [character, setCharacter] = useState(CHARACTER);
+  const context = useContext(Context);
 
-  const handleLikeClick = id => {
-    setCharacter(prevState =>
-      prevState.map(item => {
-        return item.id === id ? {...item, isLike: !item.isLike} : item;
-      })
-    )
-  };
   return (
     <>
       <Heading>Characters</Heading>
       <div className={s.cardWrap}>
-        {character.map(item => {
+        {context.character.map(item => {
           return (
             <div key={item.id}>
               <ChapterCard
@@ -27,7 +20,7 @@ const Characters = () => {
                 src={item.thumbnail.path}
                 humanName={item.humanName}
                 description={item.description}
-                onLikeClick={handleLikeClick}
+                onLikeClick={context.handleLikeClick}
                 isLike={item.isLike}
               />
             </div>

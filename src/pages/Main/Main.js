@@ -1,23 +1,14 @@
-import {useState} from "react";
-import Slider from "../../components/Slider";
+import { useContext, useState } from "react";
+import ChapterCard from "../../components/ChapterCard";
 import Container from "../../components/Container";
 import Heading from "../../components/Heading";
-import ChapterCard from "../../components/ChapterCard";
+import Slider from "../../components/Slider";
+import { Context } from "../../Context";
 import s from "./Main.module.scss";
 
-import {CHARACTER} from "../../constants/characters";
-
 const Main = () => {
-  const [character, setCharacter] = useState(CHARACTER);
+  const context = useContext(Context);
   const [characterId, setCharacterId] = useState(null);
-
-  const handleLikeClick = id => {
-    setCharacter(prevState =>
-      prevState.map(item => {
-        return item.id === id ? {...item, isLike: !item.isLike} : item;
-      })
-    )
-  };
 
   const handleReadBioClick = id => {
     setCharacterId(id);
@@ -25,7 +16,7 @@ const Main = () => {
 
   return (
     <>
-      <Slider/>
+      <Slider />
       <section className={s.cardSection}>
         <Container>
           <div className={s.cardTitle}>
@@ -37,7 +28,7 @@ const Main = () => {
             </Heading>
           </div>
           <div className={s.cardWrap}>
-            {character.map(item => {
+            {context.character.map(item => {
               return (
                 <div key={item.id}>
                   <ChapterCard
@@ -46,9 +37,9 @@ const Main = () => {
                     src={item.thumbnail.path}
                     humanName={item.humanName}
                     description={item.description}
-                    onLikeClick={handleLikeClick}
+                    onLikeClick={context.handleLikeClick}
                     isLike={item.isLike}
-                    onReadBio={handleReadBioClick}/>
+                    onReadBio={handleReadBioClick} />
                 </div>
               );
             })}
