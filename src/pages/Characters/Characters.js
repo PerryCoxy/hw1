@@ -5,13 +5,13 @@ import { Context } from "../../Context";
 import s from './Characters.module.scss';
 
 const Characters = () => {
-  const context = useContext(Context);
+  const characterContext = useContext(Context);
 
   return (
     <>
       <Heading>Characters</Heading>
       <div className={s.cardWrap}>
-        {context.character.map(item => {
+        {characterContext.character.map(item => {
           return (
             <div key={item.id}>
               <ChapterCard
@@ -20,7 +20,7 @@ const Characters = () => {
                 src={item.thumbnail.path}
                 humanName={item.humanName}
                 description={item.description}
-                onLikeClick={context.handleLikeClick}
+                onLikeClick={characterContext.handleLikeClick}
                 isLike={item.isLike}
               />
             </div>

@@ -7,7 +7,7 @@ import { Context } from "../../Context";
 import s from "./Main.module.scss";
 
 const Main = () => {
-  const context = useContext(Context);
+  const characterContext = useContext(Context);
   const [characterId, setCharacterId] = useState(null);
 
   const handleReadBioClick = id => {
@@ -28,7 +28,7 @@ const Main = () => {
             </Heading>
           </div>
           <div className={s.cardWrap}>
-            {context.character.map(item => {
+            {characterContext.character.map(item => {
               return (
                 <div key={item.id}>
                   <ChapterCard
@@ -37,7 +37,7 @@ const Main = () => {
                     src={item.thumbnail.path}
                     humanName={item.humanName}
                     description={item.description}
-                    onLikeClick={context.handleLikeClick}
+                    onLikeClick={characterContext.handleLikeClick}
                     isLike={item.isLike}
                     onReadBio={handleReadBioClick} />
                 </div>
